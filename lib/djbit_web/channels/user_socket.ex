@@ -5,7 +5,8 @@ defmodule DjBitWeb.UserSocket do
   # channel "room:*", DjBitWeb.RoomChannel
 
   ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket
+  transport :websocket, Phoenix.Transports.WebSocket,
+    timeout: 45_000 # Let Phoenix close conn before Heroku 55-second timeout window
   # transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can
