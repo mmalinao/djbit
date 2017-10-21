@@ -56,3 +56,12 @@ config :djbit, DjBit.Repo,
   database: "djbit_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Test Watch
+config :mix_test_watch,
+  clear: true,
+  exclude: [~r/priv\/repo\/.*/],
+  tasks: [
+    "test",
+    "coveralls.html"
+  ]

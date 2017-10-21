@@ -45,7 +45,10 @@ defmodule DjBit.Mixfile do
       {:cowboy, "~> 1.0"},
 
       # Code Coverage
-      {:excoveralls, "~> 0.7", only: :test}
+      {:excoveralls, "~> 0.7", only: :test},
+
+      # Automate tasks
+      {:mix_test_watch, "~> 0.3", only: :dev, runtime: false}
     ]
   end
 
