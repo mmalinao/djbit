@@ -1,7 +1,7 @@
 defmodule DjBit.Factory do
   use ExMachina.Ecto, repo: DjBit.Repo
 
-  alias DjBit.Accounts.User
+  alias DjBit.Accounts.{User, Team}
 
   def slack_token_exchange_factory do
     %{
@@ -18,6 +18,13 @@ defmodule DjBit.Factory do
       name: Faker.Name.name(),
       slack_id: "U#{Faker.Lorem.characters(8) |> to_string |> String.upcase}",
       img_url: Faker.Avatar.image_url()
+    }
+  end
+
+  def team_factory do
+    %Team{
+      name: Faker.Team.name(),
+      slack_id: "T#{Faker.Lorem.characters(8) |> to_string |> String.upcase}"
     }
   end
 end

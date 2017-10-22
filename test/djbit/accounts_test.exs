@@ -29,4 +29,16 @@ defmodule DjBit.AccountsTest do
       assert {:error, %Ecto.Changeset{}} = Accounts.create_user(attrs)
     end
   end
+
+  describe "create_team/1" do
+    test "creates a Team" do
+      attrs = string_params_for(:team)
+      assert {:ok, _team} = Accounts.create_team(attrs)
+    end
+
+    test "with invalid attrs returns error changeset" do
+      attrs = string_params_for(:team, slack_id: nil)
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_team(attrs)
+    end
+  end
 end

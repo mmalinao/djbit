@@ -1,7 +1,7 @@
 defmodule DjBit.Accounts do
   import Ecto.Query, warn: false
   alias DjBit.Repo
-  alias DjBit.Accounts.User
+  alias DjBit.Accounts.{User, Team}
 
   def create_user_from_slack(code) do
     data = Slack.Web.Oauth.access(System.get_env("SLACK_CLIENT_ID"), System.get_env("SLACK_CLIENT_SECRET"), code)
@@ -13,6 +13,12 @@ defmodule DjBit.Accounts do
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_team(attrs \\ %{}) do
+    %Team{}
+    |> Team.changeset(attrs)
     |> Repo.insert()
   end
 end
