@@ -44,8 +44,11 @@ defmodule DjBit.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
 
-      # Code Coverage
+      # Test Suite
+      {:mock, "~> 0.2.0", only: :test},
+      {:ex_machina, "~> 2.1", only: :test},
       {:excoveralls, "~> 0.7", only: :test},
+      {:faker, "~> 0.9", only: :test},
 
       # Automate tasks
       {:mix_test_watch, "~> 0.3", only: :dev, runtime: false}
