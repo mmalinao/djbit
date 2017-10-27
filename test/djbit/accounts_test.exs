@@ -92,4 +92,17 @@ defmodule DjBit.AccountsTest do
       assert {:error, %Ecto.Changeset{}} = Accounts.create_team(attrs)
     end
   end
+
+  describe "get_user/1" do
+    test "returns user given uuid" do
+      user = insert(:user)
+
+      result = Accounts.get_user(user.id)
+      assert result.id == user.id
+    end
+
+    test "when user does not exist, returns nil" do
+      refute Accounts.get_user(Ecto.UUID.generate)
+    end
+  end
 end

@@ -44,4 +44,6 @@ defmodule DjBit.Accounts do
         {:ok, team}
     end
   end
+
+  def get_user(uuid), do: Repo.get(User, uuid)
 end

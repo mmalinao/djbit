@@ -44,7 +44,10 @@ defmodule DjBit.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
 
-      # Slack client,
+      # Authentication
+      {:guardian, "~> 1.0-beta"},
+
+      # Slack client
       {:slack, "~> 0.12.0"},
 
       # Test Suite

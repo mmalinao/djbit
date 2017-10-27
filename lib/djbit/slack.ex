@@ -22,7 +22,7 @@ defmodule DjBit.Slack do
   end
 
   def authorize_url do
-    "https://slack.com/oauth/authorize?client_id=#{System.get_env("SLACK_CLIENT_ID")}&scope=identity.basic&redirect_uri=#{redirect_uri}"
+    "https://slack.com/oauth/authorize?client_id=#{System.get_env("SLACK_CLIENT_ID")}&scope=identity.basic&redirect_uri=#{redirect_uri()}"
   end
 
   defp redirect_uri do
