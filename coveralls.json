@@ -7,6 +7,7 @@
   "skip_files": [
     "test/support",
     "lib/djbit/application.ex",
+    "lib/djbit/slack.ex",
     "lib/djbit_web.ex",
     "lib/djbit_web/endpoint.ex",
     "lib/djbit_web/views/error_helpers.ex"

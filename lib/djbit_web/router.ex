@@ -9,18 +9,14 @@ defmodule DjBitWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  # pipeline :api do
+  #   plug :accepts, ["json"]
+  # end
 
   scope "/", DjBitWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/slack/callback", SessionController, :callback
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", DjBitWeb do
-  #   pipe_through :api
-  # end
 end

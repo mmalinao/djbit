@@ -1,5 +1,7 @@
 defmodule DjBit.Slack do
   use HTTPoison.Base
+  import DjBitWeb.Router.Helpers
+  alias DjBitWeb.Endpoint
 
   @headers [{"Content-Type", "application/x-www-form-urlencoded"}]
 
@@ -17,6 +19,14 @@ defmodule DjBit.Slack do
       %{"ok" => false, "error" => error} ->
         error
     end
+  end
+
+  def authorize_url do
+    "https://slack.com/oauth/authorize?client_id=#{System.get_env("SLACK_CLIENT_ID")}&scope=identity.basic&redirect_uri=#{redirect_uri}"
+  end
+
+  defp redirect_uri do
+    session_url(Endpoint, :callback) |> URI.encode_www_form
   end
 
   ## HTTPoison Extensions
