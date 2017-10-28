@@ -21,7 +21,7 @@ defmodule DjBitWeb.SessionControllerTest do
       assert Repo.get_by(User, slack_id: slack_user_identity["user"]["id"])
     end
 
-    test "signs in user", %{conn: conn} do
+    test "signs in user and redirects to user show", %{conn: conn} do
       slack_user_identity = string_params_for(:slack_user_identity)
 
       with_mock DjBit.Slack, [exchange_for_user_identity: fn("valid_code") -> slack_user_identity end] do
@@ -29,8 +29,25 @@ defmodule DjBitWeb.SessionControllerTest do
         |> get("/slack/callback", %{"code" => "valid_code"})
 
         assert Guardian.Plug.authenticated?(resp)
-        assert Guardian.Plug.current_resource(resp).slack_id == slack_user_identity["user"]["id"]
+
+        current_user = Guardian.Plug.current_resource(resp)
+
+        assert current_user.slack_id == slack_user_identity["user"]["id"]
+        assert redirected_to(resp) =~ "/users/#{current_user.id}"
       end
+    end
+  end
+
+  describe "DELETE /sign_out" do
+    test "signs out user and redirects to root", %{conn: conn} do
+      user = insert(:user)
+
+      resp = conn
+      |> Guardian.Plug.sign_in(user)
+      |> delete("/sign_out")
+
+      refute Guardian.Plug.authenticated?(resp)
+      assert redirected_to(resp) == "/"
     end
   end
 end

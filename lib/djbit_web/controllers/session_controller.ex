@@ -8,6 +8,12 @@ defmodule DjBitWeb.SessionController do
 
     conn
     |> Guardian.Plug.sign_in(user)
-    |> text("OK")
+    |> redirect(to: "/users/#{user.id}")
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> Guardian.Plug.sign_out
+    |> redirect(to: "/")
   end
 end
