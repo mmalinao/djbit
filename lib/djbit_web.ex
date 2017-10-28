@@ -37,6 +37,8 @@ defmodule DjBitWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
+      import DjBitWeb.Guardian.Plug, only: [authenticated?: 1]
+
       import DjBitWeb.Router.Helpers
       import DjBitWeb.ErrorHelpers
       import DjBitWeb.Gettext
